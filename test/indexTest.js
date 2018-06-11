@@ -5,6 +5,7 @@ describe('index', () => {
     let question = questions[0]
     it('appends the question to the question-container', function(){
       appendQuestion(question)
+
       expect(document.querySelector('.question-container').innerHTML).to.eq('Lightning never strikes in the same place twice')
     })
   })
@@ -14,6 +15,8 @@ describe('index', () => {
 
     beforeEach(function () {
       questionContainer = document.querySelector('.question-container')
+      document.querySelector('.question-container').innerHTML = ""
+
      });
 
     it('should have question start off as undefined', () => {
@@ -27,10 +30,12 @@ describe('index', () => {
 
     it('should append the question', function(){
       askQuestionThen()
+
       expect(document.querySelector('.question-container').innerHTML).to.eq('Lightning never strikes in the same place twice')
     })
 
     it('should return a promise', function(){
+
       expect(askQuestionThen()).to.be.a('promise')
     })
   })
@@ -39,7 +44,11 @@ describe('index', () => {
     let question = questions[0]
 
     it('removes the question to the question-container', function(){
+      // debugger;
+      document.querySelector('.question-container').innerHTML = ""
+
       appendQuestion(question)
+
       expect(document.querySelector('.question-container').innerHTML).to.eq('Lightning never strikes in the same place twice')
       removeQuestion()
       expect(document.querySelector('.question-container').innerHTML).to.eq('')
@@ -54,7 +63,7 @@ describe('index', () => {
      });
 
     it('should append the question for 10 seconds and then remove the question when the promise resolves', function(){
-      let resolvingPromise = askQuestionThenRemoveQuestion(1000)
+      let resolvingPromise = askQuestionThenRemoveQuestion(10000)
       expect(questionContainer.innerHTML).to.eq("Lightning never strikes in the same place twice")
       resolvingPromise.then( (result) => {
           expect(questionContainer.innerHTML).to.equal('');

@@ -5,3 +5,34 @@ const questions = [
 ]
 
 let question;
+
+
+function appendQuestion(q) {
+  const qcon = document.querySelector('.question-container');
+
+  const newQ = document.createTextNode(q["questionText"]);
+  // debugger
+  qcon.appendChild(newQ);
+}
+
+function askQuestionThen(time) {
+  // const qcon = document.querySelector('.question-container');
+  question = questions[0];
+  return new Promise( (resolve, reject) => {
+    appendQuestion(question);
+    setTimeout(() => { resolve() }, time )
+  });
+}
+
+function removeQuestion() {
+
+  const qcon = document.querySelector('.question-container');
+  qcon.removeChild(qcon.lastChild);
+  // debugger;
+  return new Promise( () => {
+  });
+}
+
+function askQuestionThenRemoveQuestion(time) {
+  askQuestionThen(time).then(removeQuestion);
+}
